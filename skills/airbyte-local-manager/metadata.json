@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "organization": "berrydev-ai",
+  "date": "February 2026",
+  "abstract": "Manage, monitor, troubleshoot, and develop with locally running Airbyte instances using abctl CLI, kubectl, and Airbyte Public API. Includes diagnostic scripts, troubleshooting playbooks, and complete command references.",
+  "references": [
+    "references/abctl_commands.md",
+    "references/api_endpoints.md",
+    "references/troubleshooting_playbook.md"
+  ]
+}
