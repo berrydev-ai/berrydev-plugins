@@ -1,10 +1,10 @@
 # Agent Skills
 
-A collection of [Agent Skills](https://github.com/anthropics/agent-skills) for extending AI coding agents with specialized domain knowledge, workflows, and tool integrations.
+A [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugin-marketplaces) for extending AI coding agents with specialized domain knowledge, workflows, and tool integrations.
 
-## Available Skills
+## Available Plugins
 
-### [`airbyte-local-manager`](./skills/airbyte-local-manager/)
+### [`airbyte-local-manager`](./plugins/airbyte-local-manager/)
 
 Manage, monitor, troubleshoot, and develop with locally running Airbyte instances using `abctl` CLI and `kubectl`.
 
@@ -21,27 +21,20 @@ Manage, monitor, troubleshoot, and develop with locally running Airbyte instance
 
 ## Installation
 
-```bash
-npx skills add berrydev-ai/agent-skills
+Add the marketplace and install a plugin:
+
 ```
-
-Or install a specific skill:
-
-```bash
-npx skills add berrydev-ai/agent-skills/airbyte-local-manager
-```
-
-### Manual Installation
-
-Copy the desired skill directory from `skills/` into your project's `.claude/skills/` directory:
-
-```bash
-cp -r skills/airbyte-local-manager /path/to/your/project/.claude/skills/
+/plugin marketplace add berrydev-ai/agent-skills
+/plugin install airbyte-local-manager@berrydev-plugins
 ```
 
 ## Usage
 
-Once installed, the skill is automatically available to Claude Code and other compatible AI coding agents. The agent will use the skill's `SKILL.md` as context when working on relevant tasks.
+Once installed, the skill is automatically available to Claude Code. The agent will use the skill's `SKILL.md` as context when working on relevant tasks. You can also invoke it directly:
+
+```
+/airbyte-local-manager
+```
 
 ### Example Prompts
 
@@ -50,26 +43,31 @@ Once installed, the skill is automatically available to Claude Code and other co
 - "Verify that data is being written to S3 from my Airbyte connection"
 - "Restart the Airbyte worker pod"
 
-## Skill Structure
-
-Each skill follows this structure:
+## Repository Structure
 
 ```
-skills/<skill-name>/
-├── SKILL.md              # Agent instructions (loaded as context)
-├── README.md             # Human-readable documentation
-├── metadata.json         # Version, organization, description
-├── scripts/              # Executable scripts the agent can run
-└── references/           # Detailed reference docs (loaded on demand)
+agent-skills/
+├── .claude-plugin/
+│   └── marketplace.json      # Marketplace catalog
+├── plugins/
+│   └── airbyte-local-manager/
+│       ├── .claude-plugin/
+│       │   └── plugin.json   # Plugin manifest
+│       ├── skills/
+│       │   └── airbyte-local-manager/
+│       │       └── SKILL.md  # Agent instructions (loaded as context)
+│       ├── scripts/          # Executable scripts the agent can run
+│       ├── references/       # Detailed reference docs (loaded on demand)
+│       ├── metadata.json     # Version, organization, description
+│       └── README.md         # Human-readable documentation
+├── CLAUDE.md
+├── README.md
+└── LICENSE
 ```
-
-- **`SKILL.md`** - The primary file the agent reads. Contains workflows, commands, and decision trees.
-- **`references/`** - Deeper documentation loaded only when the agent needs specific details, keeping the main context window efficient.
-- **`scripts/`** - Automation scripts the agent can execute to perform diagnostics or common operations.
 
 ## Contributing
 
-To add a new skill, create a directory under `skills/` following the structure above. See [`AGENTS.md`](./AGENTS.md) for detailed guidelines on writing effective skills.
+To add a new plugin, see [`CLAUDE.md`](./CLAUDE.md) for detailed guidelines.
 
 ## License
 

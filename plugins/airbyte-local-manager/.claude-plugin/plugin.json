@@ -1,0 +1,9 @@
+{
+  "name": "airbyte-local-manager",
+  "description": "Manage, monitor, troubleshoot, and develop with locally running Airbyte instances using abctl CLI, kubectl, and Airbyte Public API.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Berry Development"
+  },
+  "license": "MIT"
+}
